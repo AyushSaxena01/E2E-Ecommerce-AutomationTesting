@@ -70,8 +70,5 @@ public class listener extends utilities implements ITestListener {
         report.flush();
     }
 
-    @Override
-    public void onTestStart() {
 
-    }
 }

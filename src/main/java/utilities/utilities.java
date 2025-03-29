@@ -37,7 +37,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 
-public abstract class utilities {
+public class utilities {
     public static WebDriver driver;
     public static ExtentReports report;
 
@@ -179,17 +179,20 @@ String content = new String(Files.readAllBytes(Paths.get(path)));
         return code;
     }
 
+    public static void getUrl(String url){
+        driver.get(url);
+    }
 
-     @BeforeClass
+
+     @BeforeClass(alwaysRun = true)
     public static void configuration() throws IOException {
         driver = setDriver();
         clearLogFile();
      }
 
-     @AfterClass
+     @AfterClass(alwaysRun = true)
     public static void closeDriver(){
-        driver.close();
+//        driver.close();
      }
 
-    public abstract void onTestStart();
 }
