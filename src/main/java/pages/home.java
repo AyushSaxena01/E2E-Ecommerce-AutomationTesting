@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.utilities;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +47,9 @@ private WebDriver driver;
 
     @FindBy(xpath = "//span[@class='a-price-whole']")
     List<WebElement> priceElement;
+
+    @FindBy(xpath = "//span[@class='a-list-item']/a[text()='Smartphones']")
+    WebElement category;
 
     public void search(String search){
         searchInput.sendKeys(search);
@@ -110,6 +115,14 @@ private WebDriver driver;
             }
         }
         Assert.assertTrue(condition);
+    }
+
+    public void clickOnProduct() throws IOException {
+        searchInput.clear();
+        search(getProperty("search"));
+        utilities.stroll(productsOnFirstPage.get(9));
+        productsOnFirstPage.get(9).click();
+        Assert.assertTrue(category.isDisplayed());
     }
 
 }

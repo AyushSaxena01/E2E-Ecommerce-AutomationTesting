@@ -44,4 +44,9 @@ public home homeObject;
         homeObject.sortPriceoHighToLow();
     }
 
+    @Test(priority=8)
+    public void clickProduct() throws IOException {
+        homeObject.clickOnProduct();
+    }
+
 }
