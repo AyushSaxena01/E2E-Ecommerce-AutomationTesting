@@ -192,7 +192,7 @@ String content = new String(Files.readAllBytes(Paths.get(path)));
 
      @AfterClass(alwaysRun = true)
     public static void closeDriver(){
-//        driver.close();
+        driver.close();
      }
 
 }
