@@ -10,3 +10,5 @@ Test flow:
 2. Cart (Adding product, price, removing product, etc).    
 3. Login functionality (User login, user logout, correct credentials, wrong credentials, etc).
 
+Also implemented Jenkins and webhooks in this project for triggered build.
+
