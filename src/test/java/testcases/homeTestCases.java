@@ -1,4 +1,6 @@
 package testcases;
+import io.qameta.allure.Description;
+import io.qameta.allure.Feature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.ITestResult;
@@ -20,6 +22,8 @@ public class homeTestCases extends utilities {
         homeObject = new home(driver);
     }
     @Test(priority=2)
+    @Feature("Amazon Website")
+    @Description("Navigating to Amazon website.")
     public void getUrl_H_1() throws IOException {
        log.info("=======================Starting Home Test Cases========================");
          try{
@@ -30,31 +34,44 @@ public class homeTestCases extends utilities {
          }
      }
     @Test(priority=3)
+    @Feature("Search")
+    @Description("Searching for a mobile phone product.")
     public void search_H_2() throws IOException {
         homeObject.search(getProperty("search"));
     }
 
     @Test(priority = 4)
+    @Feature("Product Count")
+    @Description("Counting the relevant products being shown.")
     public void countProducts_H_3(){
         homeObject.countProducts();
     }
 
     @Test(priority = 5)
+    @Feature("Filter")
+    @Description("Filtering the results for only 8gb models.")
     public void filter_H_4(){
         homeObject.applyFilter();
     }
 
     @Test(priority = 6)
+    @Feature("Sorting")
+    @Description("Price:Low to Hihg")
     public void sortLowTOHigh_H_5(){
         homeObject.sortPriceLowToHigh();
     }
 
     @Test(priority = 7)
-    public void sortHighToLow_H_6(){
+    @Feature("Sorting")
+    @Description("Price:Hihg to Low")
+    public void sortHighToLow_H_6()
+    {
         homeObject.sortPriceoHighToLow();
     }
 
     @Test(priority=8)
+    @Feature("Product page")
+    @Description("Opening a random product page.")
     public void clickProduct_H_7() throws IOException {
         homeObject.clickOnProduct();
     }

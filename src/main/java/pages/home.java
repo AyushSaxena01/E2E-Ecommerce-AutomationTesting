@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.utilities;
-
+import io.qameta.allure.Step;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,13 +50,13 @@ private WebDriver driver;
 
     @FindBy(xpath = "//span[@class='a-list-item']/a[text()='Smartphones']")
     WebElement category;
-
+    @Step("Searches the object.")
     public void search(String search){
         searchInput.sendKeys(search);
         searchSubmitButton.click();
         Assert.assertTrue(samsungLogo.isDisplayed());
     }
-
+    @Step("Display the total count of the relevant product.")
     public int displayProductCount(){
         int count=0;
         String display = displayProductCount.getText();
@@ -64,7 +64,7 @@ private WebDriver driver;
         count = Integer.parseInt(strCount);
         return count;
     }
-
+    @Step("Display the total count of product after applying filter.")
     public int displayProductCountAfterFilter(){
         int count=0;
         String display = displayProductCount.getText();
@@ -72,17 +72,17 @@ private WebDriver driver;
         count = Integer.parseInt(strCount);
         return count;
     }
-
+    @Step("Verify that actual count and count being displayed on website are equal.")
     public void countProducts(){
        Assert.assertEquals(productsOnFirstPage.size(),displayProductCount());
     }
-
+    @Step("Applies the filter for 8GB models.")
     public void applyFilter(){
         utilities.stroll(filter8GB);
         filter8GB.click();
         Assert.assertEquals(productsOnFirstPage.size(),displayProductCountAfterFilter());
     }
-
+    @Step("Sorting products according to ascending price (low to high)")
     public void sortPriceLowToHigh(){
         boolean condition = true;
         sortDropDown.click();
@@ -99,7 +99,7 @@ private WebDriver driver;
         }
        Assert.assertTrue(condition);
     }
-
+    @Step("Sorting products according to descending price (high to low).")
     public void sortPriceoHighToLow(){
         boolean condition = true;
         sortDropDown.click();
@@ -116,7 +116,7 @@ private WebDriver driver;
         }
         Assert.assertTrue(condition);
     }
-
+    @Step("Clicks on a specific product to open it's page.")
     public void clickOnProduct() throws IOException {
         searchInput.clear();
         search(getProperty("search"));
