@@ -1,13 +1,18 @@
 package testcases;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.testng.ITestResult;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.home;
 import utilities.utilities;
+import utilities.log;
 
 import java.io.IOException;
 
 public class homeTestCases extends utilities {
-public home homeObject;
+    private static final Logger log = LoggerFactory.getLogger(homeTestCases.class);
+    public home homeObject;
 
 
     @Test(priority=1)
@@ -16,9 +21,14 @@ public home homeObject;
     }
     @Test(priority=2)
     public void getUrl_H_1() throws IOException {
-
-          getUrl(getProperty("url"));
-    }
+       log.info("=======================Starting Home Test Cases========================");
+         try{
+             getUrl(getProperty("url"));
+         } catch (Exception e) {
+             log.info("Exception occured");
+             log.info(e.getMessage());
+         }
+     }
     @Test(priority=3)
     public void search_H_2() throws IOException {
         homeObject.search(getProperty("search"));

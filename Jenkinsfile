@@ -14,27 +14,38 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'mvn clean install'  // Build the project using Maven
+                bat 'mvn clean install'  // Build the project using Maven
             }
         }
 
         stage('Run Tests') {
             steps {
-                sh 'mvn test'  // Run Selenium tests
+                bat 'mvn test'  // Run Selenium tests
             }
         }
 
-        stage('Generate Allure Report') {
+        stage('Publish Extent Report') {
             steps {
-                sh 'mvn allure:report'  // Generates a test report
+                publishHTML([
+                    reportDir: 'test-output\\extentreports', 
+                    reportFiles: 'Amazon.html', 
+                    reportName: 'Extent Report',
+                    keepAll: true
+                ])
             }
         }
 
-        stage('Publish Allure Report') {
-            steps {
-                allure includeProperties: false, jdk: '', results: [[path: 'target/allure-results']]
-            }
-        }
+        // stage('Generate Allure Report') {
+        //     steps {
+        //         bat 'mvn allure:report'  // Generates a test report
+        //     }
+        // }
+
+        // stage('Publish Allure Report') {
+        //     steps {
+        //         allure includeProperties: false, jdk: '', results: [[path: 'target/allure-results']]
+        //     }
+        // }
     }
 
     post {

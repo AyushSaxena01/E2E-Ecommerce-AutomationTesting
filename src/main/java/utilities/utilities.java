@@ -133,7 +133,7 @@ public class utilities {
     }
 
     public static ExtentReports getReportObject() {
-        String path = "Amazon.html";
+        String path = System.getProperty("user.dir")+ File.separator +"\\test-output\\extentreports\\Amazon.html";
         ExtentSparkReporter extent = new ExtentSparkReporter(path);
         extent.viewConfigurer()
                 .viewOrder()
