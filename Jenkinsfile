@@ -35,17 +35,17 @@ pipeline {
             }
         }
 
-        // stage('Generate Allure Report') {
-        //     steps {
-        //         bat 'mvn allure:report'  // Generates a test report
-        //     }
-        // }
+        stage('Generate Allure Report') {
+            steps {
+                bat 'mvn allure:report'  // Generates a test report
+            }
+        }
 
-        // stage('Publish Allure Report') {
-        //     steps {
-        //         allure includeProperties: false, jdk: '', results: [[path: 'target/allure-results']]
-        //     }
-        // }
+        stage('Publish Allure Report') {
+            steps {
+                allure includeProperties: false, jdk: '', results: [[path: 'target/allure-results']]
+            }
+        }
     }
 
     post {
