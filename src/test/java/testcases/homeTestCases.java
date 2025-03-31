@@ -15,37 +15,37 @@ public home homeObject;
         homeObject = new home(driver);
     }
     @Test(priority=2)
-    public void getUrl() throws IOException {
+    public void getUrl_H_1() throws IOException {
 
           getUrl(getProperty("url"));
     }
     @Test(priority=3)
-    public void search() throws IOException {
+    public void search_H_2() throws IOException {
         homeObject.search(getProperty("search"));
     }
 
     @Test(priority = 4)
-    public void countProducts(){
+    public void countProducts_H_3(){
         homeObject.countProducts();
     }
 
     @Test(priority = 5)
-    public void filter(){
+    public void filter_H_4(){
         homeObject.applyFilter();
     }
 
     @Test(priority = 6)
-    public void sortLowTOHigh(){
+    public void sortLowTOHigh_H_5(){
         homeObject.sortPriceLowToHigh();
     }
 
     @Test(priority = 7)
-    public void sortHighToLow(){
+    public void sortHighToLow_H_6(){
         homeObject.sortPriceoHighToLow();
     }
 
     @Test(priority=8)
-    public void clickProduct() throws IOException {
+    public void clickProduct_H_7() throws IOException {
         homeObject.clickOnProduct();
     }
 

@@ -10,6 +10,8 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import netscape.javascript.JSObject;
 import org.apache.commons.io.FileUtils;
 
+import java.io.*;
+import java.sql.*;
 import org.json.JSONObject;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -25,13 +27,12 @@ import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
@@ -167,13 +168,13 @@ return text;
     public static String setName(ITestResult result) throws IOException {
         String path = System.getProperty("user.dir")+File.separator+"src\\main\\java\\data\\testCode.JSON";
 String methodName = result.getMethod().getMethodName();
-String [] codeArr = {"a","",""};
+String [] codeArr = {"_H_","_C_","_L_"};
 String code="Common";
 String content = new String(Files.readAllBytes(Paths.get(path)));
         JSONObject obj = new JSONObject(content);
         for(int i=0;i<codeArr.length;i++){
             if(methodName.contains(codeArr[i])){
-                code=codeArr[i];
+                code=obj.getString(codeArr[i]);
             }
         }
         return code;
@@ -181,6 +182,38 @@ String content = new String(Files.readAllBytes(Paths.get(path)));
 
     public static void getUrl(String url){
         driver.get(url);
+    }
+
+    public static String databaseProperty(String key) throws IOException {
+        String path = System.getProperty("user.dir")+File.separator+"\\src\\main\\java\\data\\database.properties";
+        FileInputStream file = new FileInputStream(path);
+        Properties property = new Properties();
+        property.load(file);
+        file.close();
+        return property.getProperty(key);
+    }
+
+    public static void setDataBaseProperty(String key, String value) throws IOException {
+        String path = System.getProperty("user.dir")+File.separator+"\\src\\main\\java\\data\\database.properties";
+        FileInputStream file = new FileInputStream(path);
+        Properties property = new Properties();
+        property.load(file);
+        file.close();
+        property.setProperty(key,value);
+        FileOutputStream updatedFile = new FileOutputStream(path);
+        property.store(updatedFile,"Updated");
+        updatedFile.close();
+    }
+
+    public static ResultSet databaseConnector(String query) throws IOException, SQLException {
+        String host="XYZ";
+        String port = "3306";
+        String name = "XYZ"; //database schema name.
+
+        Connection connection = DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/"+name,getProperty("database_user"),getProperty("database_password"));
+        Statement statement  = connection.createStatement();
+        ResultSet result = statement.executeQuery(query);
+        return result;
     }
 
 

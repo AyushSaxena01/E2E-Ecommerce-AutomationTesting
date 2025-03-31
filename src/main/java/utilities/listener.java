@@ -37,10 +37,15 @@ public class listener extends utilities implements ITestListener {
     public void onTestFailure(ITestResult result) {
         WebDriver driver = null;
         extenttest.get().fail(result.getThrowable());
-        String testMethod = result.getMethod().getMethodName();
+        String testMethodName = result.getMethod().getMethodName();
         try{
             driver = (WebDriver)result.getTestClass().getRealClass().getField("driver").get(result.getInstance());
         }catch (Exception e){
+            e.printStackTrace();
+        }
+        try{
+            extenttest.get().addScreenCaptureFromPath(getScreenShot(testMethodName,driver),result.getMethod().getMethodName());
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

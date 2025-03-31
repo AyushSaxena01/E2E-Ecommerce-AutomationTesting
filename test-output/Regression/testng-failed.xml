@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Regression]" guice-stage="DEVELOPMENT" verbose="0">
+  <listeners>
+    <listener class-name="utilities.listener"/>
+  </listeners>
+  <test thread-count="5" name="Test(failed)" verbose="0">
+    <classes>
+      <class name="testcases.homeTestCases">
+        <methods>
+          <include name="clickProduct_H_7"/>
+          <include name="closeDriver"/>
+          <include name="countProducts_H_3"/>
+          <include name="configuration"/>
+          <include name="filter_H_4"/>
+        </methods>
+      </class> <!-- testcases.homeTestCases -->
+    </classes>
+  </test> <!-- Test(failed) -->
+</suite> <!-- Failed suite [Regression] -->
