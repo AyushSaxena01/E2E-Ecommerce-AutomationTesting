@@ -30,7 +30,7 @@ pipeline {
                     reportDir: 'test-output\\extentreports', 
                     reportFiles: 'Amazon.html', 
                     reportName: 'Extent Report',
-                    keepAll: true
+                    keepAll: true,
                     allowMissing: true, 
                     alwaysLinkToLastBuild: false
                 ])
