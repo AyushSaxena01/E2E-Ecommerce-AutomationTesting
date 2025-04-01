@@ -18,9 +18,9 @@ pipeline {
             }
         }
 
-        stage('Run Tests') {
+        stage('Build and Run Tests') {
             steps {
-                bat 'mvn test -Pregression'  // Run Selenium tests
+                bat 'mvn verify'  //Runs tests and generate Allure results and report
             }
         }
 
@@ -34,12 +34,6 @@ pipeline {
                     allowMissing: true, 
                     alwaysLinkToLastBuild: false
                 ])
-            }
-        }
-
-        stage('Generate Allure Report') {
-            steps {
-                 bat 'mvn verify'  // Ensures Allure generates the HTML report
             }
         }
 

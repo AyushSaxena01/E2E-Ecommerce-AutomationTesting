@@ -117,7 +117,7 @@
                         <phase>verify</phase>  <!-- Ensures report is generated after tests -->
                         <goals>
                             <goal>report</goal>  <!-- Generates the report -->
-                            <goal>serve</goal>   <!-- Optionally, serves the report locally -->
+                            <goal>aggregate</goal>    <!-- Optionally, serves the report locally -->
                         </goals>
                     </execution>
                 </executions>
