@@ -20,7 +20,7 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                bat 'mvn test'  // Run Selenium tests
+                bat 'mvn test -Pregression'  // Run Selenium tests
             }
         }
 
@@ -45,7 +45,7 @@ pipeline {
 
         stage('Publish Allure Report') {
             steps {
-                allure includeProperties: false, jdk: '', results: [[path: 'target/site/allure-maven']]
+                allure includeProperties: false, jdk: '', results: [[path: 'target/allure-results']]
             }
         }
     }
