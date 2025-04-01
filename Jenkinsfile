@@ -18,9 +18,9 @@ pipeline {
             }
         }
 
-        stage('Build and Run Tests') {
+        stage('Run Tests') {
             steps {
-                bat 'mvn verify'  //Runs tests and generate Allure results and report
+                bat 'mvn test'  // Run Selenium tests
             }
         }
 
@@ -31,9 +31,15 @@ pipeline {
                     reportFiles: 'Amazon.html', 
                     reportName: 'Extent Report',
                     keepAll: true,
-                    allowMissing: true, 
+                     allowMissing: true, 
                     alwaysLinkToLastBuild: false
                 ])
+            }
+        }
+
+        stage('Generate Allure Report') {
+            steps {
+                bat 'mvn allure:report'  // Generates a test report
             }
         }
 
