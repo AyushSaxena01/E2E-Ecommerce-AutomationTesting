@@ -31,6 +31,8 @@ pipeline {
                     reportFiles: 'Amazon.html', 
                     reportName: 'Extent Report',
                     keepAll: true
+                    allowMissing: true, 
+                    alwaysLinkToLastBuild: false
                 ])
             }
         }
