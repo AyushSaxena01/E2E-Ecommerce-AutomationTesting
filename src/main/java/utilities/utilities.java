@@ -93,9 +93,16 @@ public class utilities {
         return wait;
     }
 
-    public static void expWait(By element){
+    public static void expWaitBy(By element){
         Wait().until(ExpectedConditions.visibilityOfElementLocated(element));
 
+    }
+    public static void expWaitListOfElements(List<WebElement> list){
+        Wait().until(ExpectedConditions.visibilityOfAllElements(list));
+
+    }
+    public static void expWaitWebElement(WebElement element){
+        Wait().until(ExpectedConditions.visibilityOf(element));
     }
     public static void pgUp(String xpath){
         Actions a = new Actions(driver);
@@ -119,7 +126,7 @@ public class utilities {
          return data;
      }
 
-     public static void stroll(WebElement element){
+     public static void scroll(WebElement element){
          JavascriptExecutor js = (JavascriptExecutor)driver;
          js.executeScript("arguments[0].scrollIntoView(true);",element);
      }

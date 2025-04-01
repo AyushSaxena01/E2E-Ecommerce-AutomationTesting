@@ -8,11 +8,12 @@
     <classes>
       <class name="testcases.homeTestCases">
         <methods>
-          <include name="clickProduct_H_7"/>
+          <include name="search_H_2"/>
+          <include name="clickProduct_H_8"/>
           <include name="closeDriver"/>
           <include name="countProducts_H_3"/>
+          <include name="filter_H_5"/>
           <include name="configuration"/>
-          <include name="filter_H_4"/>
         </methods>
       </class> <!-- testcases.homeTestCases -->
     </classes>

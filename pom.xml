@@ -113,13 +113,15 @@
                 <version>2.11.2</version>
                 <executions>
                     <execution>
+                        <id>allure-report</id>
+                        <phase>verify</phase>  <!-- Ensures report is generated after tests -->
                         <goals>
                             <goal>report</goal>
-                            <goal>aggregate</goal>
                         </goals>
                     </execution>
                 </executions>
             </plugin>
+
         </plugins>
     </build>
     <dependencies>

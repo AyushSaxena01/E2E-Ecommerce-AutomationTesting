@@ -47,33 +47,43 @@ public class homeTestCases extends utilities {
         homeObject.countProducts();
     }
 
-    @Test(priority = 5)
-    @Feature("Filter")
-    @Description("Filtering the results for only 8gb models.")
-    public void filter_H_4(){
-        homeObject.applyFilter();
+    @Test(priority=5)
+    @Feature("Next page")
+    @Description("goes to next page.")
+    public void nextPage_H_4() throws IOException {
+        homeObject.nextPage();
     }
 
     @Test(priority = 6)
-    @Feature("Sorting")
-    @Description("Price:Low to Hihg")
-    public void sortLowTOHigh_H_5(){
-        homeObject.sortPriceLowToHigh();
+    @Feature("Filter")
+    @Description("Filtering the results for only 8gb models.")
+    public void filter_H_5(){
+        homeObject.applyFilter();
     }
 
     @Test(priority = 7)
     @Feature("Sorting")
+    @Description("Price:Low to Hihg")
+    public void sortLowTOHigh_H_6(){
+        homeObject.sortPriceLowToHigh();
+    }
+
+    @Test(priority = 8)
+    @Feature("Sorting")
     @Description("Price:Hihg to Low")
-    public void sortHighToLow_H_6()
+    public void sortHighToLow_H_7()
     {
         homeObject.sortPriceoHighToLow();
     }
 
-    @Test(priority=8)
+
+
+    @Test(priority=9)
     @Feature("Product page")
     @Description("Opening a random product page.")
-    public void clickProduct_H_7() throws IOException {
+    public void clickProduct_H_8() throws IOException {
         homeObject.clickOnProduct();
     }
+
 
 }

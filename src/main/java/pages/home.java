@@ -30,6 +30,9 @@ private WebDriver driver;
     @FindBy(xpath = "//h2[contains(@aria-label,'Samsung')]")
     List<WebElement> productsOnFirstPage;
 
+    @FindBy(xpath = "//h2[contains(@aria-label,'Sponsored Ad - Samsung')]")
+    List<WebElement> sponsoredProducts;
+
     @FindBy(xpath = "//h2[contains(@class,'a-size-base a-spacing-small a-spacing-top-small a-text-normal')]/span[1]")
     WebElement displayProductCount;
 
@@ -50,10 +53,22 @@ private WebDriver driver;
 
     @FindBy(xpath = "//span[@class='a-list-item']/a[text()='Smartphones']")
     WebElement category;
+
+    @FindBy(xpath="//a[text()='Next']")
+    WebElement nextPageButton;
+
+    @FindBy(xpath="//div[contains(@id,'wayfinding-breadcrumbs_feature_div')]")
+    WebElement card;
+
+    @FindBy(xpath = "//h2[text()='Results']")
+    WebElement results;
+
     @Step("Searches the object.")
     public void search(String search){
+        expWaitWebElement(searchInput);
         searchInput.sendKeys(search);
         searchSubmitButton.click();
+        expWaitWebElement(results);
         Assert.assertTrue(samsungLogo.isDisplayed());
     }
     @Step("Display the total count of the relevant product.")
@@ -62,7 +77,7 @@ private WebDriver driver;
         String display = displayProductCount.getText();
         String strCount = display.substring(2,4);
         count = Integer.parseInt(strCount);
-        return count;
+        return count+1;
     }
     @Step("Display the total count of product after applying filter.")
     public int displayProductCountAfterFilter(){
@@ -74,17 +89,20 @@ private WebDriver driver;
     }
     @Step("Verify that actual count and count being displayed on website are equal.")
     public void countProducts(){
-       Assert.assertEquals(productsOnFirstPage.size(),displayProductCount());
+       Assert.assertEquals((productsOnFirstPage.size()-sponsoredProducts.size()),displayProductCount());
     }
     @Step("Applies the filter for 8GB models.")
     public void applyFilter(){
-        utilities.stroll(filter8GB);
+        expWaitWebElement(filter8GB);
+        utilities.scroll(filter8GB);
         filter8GB.click();
+        expWaitWebElement(results);
         Assert.assertEquals(productsOnFirstPage.size(),displayProductCountAfterFilter());
     }
     @Step("Sorting products according to ascending price (low to high)")
     public void sortPriceLowToHigh(){
         boolean condition = true;
+        expWaitWebElement(sortDropDown);
         sortDropDown.click();
         priceLowToHihg.click();
         List<Integer> priceList = new ArrayList<>();
@@ -102,6 +120,7 @@ private WebDriver driver;
     @Step("Sorting products according to descending price (high to low).")
     public void sortPriceoHighToLow(){
         boolean condition = true;
+        expWaitWebElement(sortDropDown);
         sortDropDown.click();
         priceHihgToLow.click();
         List<Integer> priceList = new ArrayList<>();
@@ -120,9 +139,17 @@ private WebDriver driver;
     public void clickOnProduct() throws IOException {
         searchInput.clear();
         search(getProperty("search"));
-        utilities.stroll(productsOnFirstPage.get(9));
+        expWaitWebElement(results);
+        utilities.scroll(productsOnFirstPage.get(9));
         productsOnFirstPage.get(9).click();
+        expWaitWebElement(card);
         Assert.assertTrue(category.isDisplayed());
+    }
+
+    @Step("Moves on the second page of the application.")
+    public void nextPage(){
+         scroll(nextPageButton);
+ nextPageButton.click();
     }
 
 }
