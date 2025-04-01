@@ -20,7 +20,7 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                bat 'mvn test'  // Run Selenium tests
+                bat 'mvn verify'  // Run Selenium tests
             }
         }
 
