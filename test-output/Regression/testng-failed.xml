@@ -3,6 +3,7 @@
 <suite name="Failed suite [Regression]" guice-stage="DEVELOPMENT" verbose="0">
   <listeners>
     <listener class-name="utilities.listener"/>
+    <listener class-name="io.qameta.allure.testng.AllureTestNg"/>
   </listeners>
   <test thread-count="5" name="Test(failed)" verbose="0">
     <classes>
@@ -10,10 +11,12 @@
         <methods>
           <include name="search_H_2"/>
           <include name="clickProduct_H_8"/>
+          <include name="sortHighToLow_H_7"/>
           <include name="closeDriver"/>
           <include name="countProducts_H_3"/>
           <include name="filter_H_5"/>
           <include name="configuration"/>
+          <include name="sortLowTOHigh_H_6"/>
         </methods>
       </class> <!-- testcases.homeTestCases -->
     </classes>

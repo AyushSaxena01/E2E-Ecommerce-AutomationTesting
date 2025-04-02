@@ -20,7 +20,7 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                bat 'mvn verify'  // Run Selenium tests
+                bat 'mvn test'  // Run Selenium tests
             }
         }
 
@@ -31,7 +31,7 @@ pipeline {
                     reportFiles: 'Amazon.html', 
                     reportName: 'Extent Report',
                     keepAll: true,
-                     allowMissing: true, 
+                    allowMissing: true,
                     alwaysLinkToLastBuild: false
                 ])
             }
@@ -39,14 +39,23 @@ pipeline {
 
         stage('Generate Allure Report') {
             steps {
-                bat 'mvn allure:report'  // Generates a test report
+               bat 'mvn allure:report'
+               bat 'allure generate --single-file --clean target/allure-results'
             }
         }
 
         stage('Publish Allure Report') {
-            steps {
-                allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
-            }
+           stage('Publish Allure Report') {
+               steps {
+                   publishHTML([
+                       reportDir: 'allure-report',
+                       reportFiles: 'index.html',
+                       reportName: 'Allure Report',
+                       keepAll: true,
+                       allowMissing: true,
+                       alwaysLinkToLastBuild: false
+                   ])
+               }
         }
     }
 

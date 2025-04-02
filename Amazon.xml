@@ -5,7 +5,6 @@
 <suite name="Regression">
     <listeners>
         <listener class-name="utilities.listener">
-
         </listener>
         <listener class-name="io.qameta.allure.testng.AllureTestNg" />
     </listeners>
