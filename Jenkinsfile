@@ -44,8 +44,8 @@ pipeline {
             }
         }
 
+
         stage('Publish Allure Report') {
-           stage('Publish Allure Report') {
                steps {
                    publishHTML([
                        reportDir: 'allure-report',
@@ -57,7 +57,7 @@ pipeline {
                    ])
                }
         }
-    }
+
 
     post {
         always {
