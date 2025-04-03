@@ -19,6 +19,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
@@ -41,6 +42,21 @@ import java.util.Properties;
 public class utilities {
     public static WebDriver driver;
     public static ExtentReports report;
+    @FindBy(id="twotabsearchtextbox")
+    static WebElement searchInput;
+
+    @FindBy(id="nav-search-submit-button")
+    static WebElement searchSubmitButton;
+
+    @FindBy(xpath = "//h2[text()='Results']")
+    static WebElement results;
+
+    public static void search(String search){
+        expWaitWebElement(searchInput);
+        searchInput.sendKeys(search);
+        searchSubmitButton.click();
+        expWaitWebElement(results);
+    }
 
     public static String getProperty(String key) throws IOException {
         String path = System.getProperty("user.dir")+File.separator+"\\src\\main\\java\\data\\data.properties";

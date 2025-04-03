@@ -64,10 +64,8 @@ private WebDriver driver;
     WebElement results;
 
     @Step("Searches the object.")
-    public void search(String search){
-        expWaitWebElement(searchInput);
-        searchInput.sendKeys(search);
-        searchSubmitButton.click();
+    public void Search(String search){
+        search(search);
         expWaitWebElement(results);
         Assert.assertTrue(samsungLogo.isDisplayed());
     }

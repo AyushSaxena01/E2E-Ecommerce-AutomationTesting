@@ -37,7 +37,7 @@ public class homeTestCases extends utilities {
     @Feature("Search")
     @Description("Searching for a mobile phone product.")
     public void search_H_2() throws IOException {
-        homeObject.search(getProperty("search"));
+        homeObject.Search(getProperty("search"));
     }
 
     @Test(priority = 4)
