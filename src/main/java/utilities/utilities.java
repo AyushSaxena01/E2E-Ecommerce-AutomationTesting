@@ -35,9 +35,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.Duration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 public class utilities {
     public static WebDriver driver;
@@ -53,6 +51,7 @@ public class utilities {
 
     public static void search(String search){
         expWaitWebElement(searchInput);
+        searchInput.clear();
         searchInput.sendKeys(search);
         searchSubmitButton.click();
         expWaitWebElement(results);
@@ -130,6 +129,16 @@ public class utilities {
         Actions a = new Actions(driver);
         a.moveToElement(driver.findElement(By.xpath(xpath))).click().build().perform();
         a.sendKeys(Keys.PAGE_DOWN).build().perform();
+    }
+
+    public static void scrollToTop(){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,-(document.body.scrollHeight))");
+    }
+
+    public static void scrollToBottom(){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
     }
 
      public List<HashMap<String, String>> getJSONDataToMap(String path) throws IOException {
@@ -239,6 +248,20 @@ String content = new String(Files.readAllBytes(Paths.get(path)));
         return result;
     }
 
+    public static Set<String> getWindowHandles(){
+        Set <String> windows = driver.getWindowHandles();
+        return windows;
+    }
+
+    public static Iterator windowIterator(){
+        Set <String> windowIterator = getWindowHandles();
+        Iterator<String> iterator = windowIterator.iterator();
+        return iterator;
+    }
+
+    public String onlyNumbers(String input){
+      return input.replaceAll(",","");
+    }
 
      @BeforeClass(alwaysRun = true)
     public static void configuration() throws IOException {

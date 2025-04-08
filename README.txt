@@ -1,6 +1,6 @@
-Project : End to end ecommerce website testing using Amazon.
+Project : End to end ecommerce website testing using Amazon. (*Work in progress)
 
-Technology used: Java 17, Selenium, TestNG, Maven, IntelliJ IDEA.
+Technology used: Java 17, Selenium, TestNG, Maven, IntelliJ IDEA, Jenkins, Allure Reports, Extent Reports.
 
 This project is to test Amazon ecommerce website end to end using automation testing.  
 

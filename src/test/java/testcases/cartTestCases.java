@@ -22,28 +22,31 @@ public class cartTestCases extends utilities{
         getUrl(getProperty("url"));
     }
     @Test(priority =3)
-    public void SearchProduct1() throws IOException, InterruptedException {
+    public void SearchProduct_1() throws IOException, InterruptedException {
        cartObj.search();
     }
     @Test(priority = 4)
-    public void clickProduct1(){
+    public void clickProduct_1_AndAddToCart(){
       cartObj.clickProduct1();
     }
     @Test(priority = 5)
-    public void addProduct1ToCart(){
-        cartObj.addToCart();
-    }
-    @Test(priority = 6)
-    public void SearchProduct2() throws IOException, InterruptedException {
+    public void SearchProduct_2() throws IOException, InterruptedException {
         cartObj.search();
     }
-    @Test(priority = 7)
-    public void clickProduct2(){
+    @Test(priority = 6)
+    public void clickProduct_2_AndAddToCart(){
         cartObj.clickProduct2();
     }
-    @Test(priority = 8)
-    public void addProduct2ToCart(){
-        cartObj.addToCart();
+    @Test(priority = 7)
+    public void cartCountNumber(){
+        expWaitWebElement(cartObj.hompageCardCarousal);
+      cartObj.cartCount();
     }
+    @Test(priority = 8)
+    public void openCart(){
+       cartObj.openCart();
+    }
+
+
 
 }
