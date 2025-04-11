@@ -46,6 +46,11 @@ public class cartTestCases extends utilities{
     public void openCart(){
        cartObj.openCart();
     }
+    @Test(priority = 9)
+    public void addMultipleProductsToCart() throws IOException, InterruptedException {
+        cartObj.addMultipleProductsToCart();
+    }
+    
 
 
 

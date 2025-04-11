@@ -49,8 +49,12 @@ public class cart extends utilities {
     @FindBy(id = "anonCarousel1")
     public WebElement hompageCardCarousal;
 
+    @FindBy(xpath = "//span[@class='a-button-inner']/button")
+     List<WebElement> addToCartButtonList ;
+
     float productCost1=0;
     float productCost2=0;
+
 
 
 
@@ -119,6 +123,21 @@ public class cart extends utilities {
     public void cartCount(){
         scrollToTop();
         Assert.assertEquals(2,Integer.parseInt(cartCount.getText()));
+    }
+
+    public void addMultipleProductsToCart() throws IOException, InterruptedException {
+        amazonLogo.click();
+        expWaitWebElement(hompageCardCarousal);
+        search(getProperty("multipleProduct"));
+       addToCartButtonList.get(3).click();
+        addToCartButtonList.get(9).click();
+        addToCartButtonList.get(10).click();
+        addToCartButtonList.get(38).click();
+        addToCartButtonList.get(40).click();
+        scrollToTop();
+        Thread.sleep(2000);
+        Assert.assertEquals(7,Integer.parseInt(cartCount.getText()));
+        openCart();
     }
 
 

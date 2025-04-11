@@ -269,7 +269,7 @@ String content = new String(Files.readAllBytes(Paths.get(path)));
         clearLogFile();
      }
 
-     @AfterClass(alwaysRun = true)
+//     @AfterClass(alwaysRun = true)
     public static void closeDriver(){
         driver.close();
      }
