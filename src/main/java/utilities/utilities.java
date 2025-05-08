@@ -260,7 +260,8 @@ String content = new String(Files.readAllBytes(Paths.get(path)));
     }
 
     public String onlyNumbers(String input){
-      return input.replaceAll(",","");
+       String result = input.replaceAll(",","");
+       return result.replaceAll("\u20B9","");
     }
 
      @BeforeClass(alwaysRun = true)

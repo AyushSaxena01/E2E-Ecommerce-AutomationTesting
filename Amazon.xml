@@ -12,7 +12,8 @@
 
         <classes>
 
-            <class name="testcases.homeTestCases"/>
+<!--            <class name="testcases.homeTestCases"/>-->
+            <class name="testcases.cartTestCases"/>
 
         </classes>
 

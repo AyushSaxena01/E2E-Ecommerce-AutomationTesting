@@ -1,5 +1,6 @@
 package pages;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -11,6 +12,7 @@ import utilities.utilities;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class cart extends utilities {
     private WebDriver driver;
@@ -52,8 +54,21 @@ public class cart extends utilities {
     @FindBy(xpath = "//span[@class='a-button-inner']/button")
      List<WebElement> addToCartButtonList ;
 
+    @FindBy(xpath = "(//button[@class='a-declarative'])[1]")
+    WebElement deleteProductButton;
+
+    @FindBy(xpath = "//span[@class='a-price a-text-price sc-product-price sc-white-space-nowrap a-size-medium']")
+    List<WebElement> priceListOfCartProducts;
+
+    @FindBy(xpath = "(//span[@class='a-price a-text-price sc-product-price sc-white-space-nowrap a-size-medium'])[1]")
+    WebElement priceOfFirstCartProduct;
+
+    @FindBy(xpath = "//span[@id='sc-subtotal-amount-buybox']/span")
+    WebElement cartSubtotal;
+
     float productCost1=0;
     float productCost2=0;
+    float sumOfCartProductPrice=0;
 
 
 
@@ -112,7 +127,8 @@ public class cart extends utilities {
     }
 
     public void checkCartPrice(){
-        Assert.assertEquals(String.valueOf(productCost1+productCost2),String.valueOf(Float.parseFloat(onlyNumbers(subTotal.getText()))));
+        String subtotal = String.valueOf(Float.parseFloat(onlyNumbers(subTotal.getText())));
+        Assert.assertEquals(String.valueOf(productCost1+productCost2),subtotal);
     }
 
     public void openCart(){
@@ -138,6 +154,24 @@ public class cart extends utilities {
         Thread.sleep(2000);
         Assert.assertEquals(7,Integer.parseInt(cartCount.getText()));
         openCart();
+        validateCartPrice();
+    }
+
+public void validateCartPrice(){
+
+    priceListOfCartProducts.forEach(element->{
+        sumOfCartProductPrice+=Float.parseFloat(onlyNumbers(element.getText()));
+    });
+
+    Assert.assertEquals(String.valueOf(sumOfCartProductPrice),String.valueOf(Float.parseFloat(onlyNumbers(cartSubtotal.getText()))));
+}
+
+    public void removePproducts(){
+        String cost = onlyNumbers(priceOfFirstCartProduct.getText());
+      float price = Float.parseFloat(cost);
+      deleteProductButton.click();
+      WebElement subtotal = driver.findElement(By.xpath("//span[@id='sc-subtotal-amount-buybox']/span"));
+      Assert.assertEquals(String.valueOf(sumOfCartProductPrice-price),String.valueOf(Float.parseFloat(onlyNumbers(subtotal.getText()))));
     }
 
 

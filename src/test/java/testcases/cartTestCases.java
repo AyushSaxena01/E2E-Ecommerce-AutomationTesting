@@ -50,6 +50,11 @@ public class cartTestCases extends utilities{
     public void addMultipleProductsToCart() throws IOException, InterruptedException {
         cartObj.addMultipleProductsToCart();
     }
+    @Test(priority = 10)
+    public void removeProductFromCart() throws IOException, InterruptedException {
+        cartObj.removePproducts();
+    }
+
     
 
 
